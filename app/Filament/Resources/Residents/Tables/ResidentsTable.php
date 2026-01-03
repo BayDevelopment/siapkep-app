@@ -31,15 +31,12 @@ class ResidentsTable
 
                 TextColumn::make('gender')
                     ->label('JK')
+                    ->badge()
                     ->sortable(),
 
-                TextColumn::make('rw')
-                    ->label('RW')
-                    ->sortable(),
-
-                TextColumn::make('rt')
+                TextColumn::make('rt_rtmodel.name')
                     ->label('RT')
-                    ->sortable(),
+                    ->tooltip(fn ($record) => data_get($record, 'rt_rtmodel.rw.no_rw') ?? '-'),
 
                 TextColumn::make('status')
                     ->label('Status')

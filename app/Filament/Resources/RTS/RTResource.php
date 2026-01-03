@@ -11,7 +11,6 @@ use App\Models\RTModel;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -21,7 +20,7 @@ class RTResource extends Resource
 {
     protected static ?string $model = RTModel::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-home-modern';
 
     protected static ?string $recordTitleAttribute = 'no_rt';
     // AWAL RENOVASI MANUAL

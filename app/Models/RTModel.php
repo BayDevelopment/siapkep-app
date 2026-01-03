@@ -22,4 +22,9 @@ class RTModel extends Model
     {
         return $this->belongsTo(RWModel::class, 'rw_id');
     }
+
+    public function rt_resident()
+    {
+        return $this->hasMany(ResidentModel::class, 'rt_id', 'id');
+    }
 }

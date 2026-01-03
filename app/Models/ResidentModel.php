@@ -25,4 +25,9 @@ class ResidentModel extends Model
     protected $casts = [
         'birth_date' => 'date',
     ];
+
+    public function rt_rtmodel()
+    {
+        return $this->belongsTo(RTModel::class, 'rt_id', 'id');
+    }
 }

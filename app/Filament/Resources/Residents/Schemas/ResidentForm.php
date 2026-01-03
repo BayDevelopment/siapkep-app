@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Residents\Schemas;
 
+use Filament\Forms\Components\Select;
 use Filament\Schemas\Schema;
 
 class ResidentForm
@@ -45,18 +46,20 @@ class ResidentForm
                     ->placeholder('Alamat')
                     ->rows(3),
 
-                \Filament\Forms\Components\TextInput::make('rw')
-                    ->label('RW')
-                    ->placeholder('01')
-                    ->maxLength(3),
-
-                \Filament\Forms\Components\TextInput::make('rt')
+                Select::make('rt_id')
                     ->label('RT')
-                    ->placeholder('07')
-                    ->maxLength(3),
+                    ->relationship(
+                        name: 'rt_rtmodel',
+                        titleAttribute: 'no_rt',
+                        modifyQueryUsing: fn ($query) => $query->with('rw') // biar no_rw kebaca & gak N+1
+                    )
+                    ->getOptionLabelFromRecordUsing(fn ($record) => "{$record->no_rt} - Rw {$record->rw?->no_rw}")
+                    ->searchable()
+                    ->preload()
+                    ->required(),
 
-                \Filament\Forms\Components\Select::make('status')
-                    ->label('Status')
+                \Filament\Forms\Components\Select::make('resident_status')
+                    ->label('Status Penduduk')
                     ->required()
                     ->options([
                         'aktif' => 'Aktif',
