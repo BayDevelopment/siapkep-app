@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tb_residents', function (Blueprint $table) {
-            $table->id('id_residents');
+            $table->id('id_residents'); // saran: pakai default id
             $table->string('nik', 16)->unique();
             $table->string('full_name');
             $table->string('birth_place')->nullable();
@@ -20,13 +20,13 @@ return new class extends Migration
             $table->enum('gender', ['L', 'P']);
             $table->text('address')->nullable();
 
-            // versi simple dulu: simpan rt/rw sebagai string atau integer
-            $table->string('rw', 3)->nullable();
-            $table->string('rt', 3)->nullable();
-            $table->enum('status', ['aktif', 'pindah', 'meninggal'])->default('aktif');
+            $table->foreignId('rt_id')->nullable()->constrained('tb_rts')->nullOnDelete();
+
+            $table->enum('resident_status', ['aktif', 'mutasi', 'meninggal'])->default('aktif');
+            $table->date('status_changed_at')->nullable(); // rekomendasi
 
             $table->timestamps();
-            $table->softDeletes(); // biar aman (hapus = masuk trash dulu)
+            $table->softDeletes();
         });
     }
 

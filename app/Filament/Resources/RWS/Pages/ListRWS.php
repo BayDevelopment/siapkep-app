@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Filament\Resources\Residents\Pages;
+namespace App\Filament\Resources\RWS\Pages;
 
-use App\Filament\Resources\Residents\ResidentResource;
+use App\Filament\Resources\RWS\RWResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
-class ListResidents extends ListRecords
+class ListRWS extends ListRecords
 {
-    protected static string $resource = ResidentResource::class;
+    protected static string $resource = RWResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
             CreateAction::make()
-                ->label('Tambah Penduduk')
+                ->label('Tambah RW')
                 ->icon('heroicon-o-plus'),
         ];
     }

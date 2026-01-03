@@ -19,10 +19,7 @@ class ResidentModel extends Model
         'birth_place',
         'birth_date',
         'gender',
-        'address',
-        'rw',
-        'rt',
-        'status',
+        'address',	'rt_id',	'resident_status',	'status_changed_at',
     ];
 
     protected $casts = [

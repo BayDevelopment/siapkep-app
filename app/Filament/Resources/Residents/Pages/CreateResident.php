@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Residents\Pages;
 
 use App\Filament\Resources\Residents\ResidentResource;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateResident extends CreateRecord
@@ -11,4 +12,15 @@ class CreateResident extends CreateRecord
 
     // mematikan tombol create another
     protected static bool $canCreateAnother = false;
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Action::make('back')
+                ->label('Kembali')
+                ->url($this->getResource()::getUrl('index'))
+                ->icon('heroicon-o-arrow-left')
+                ->color('gray'),
+        ];
+    }
 }

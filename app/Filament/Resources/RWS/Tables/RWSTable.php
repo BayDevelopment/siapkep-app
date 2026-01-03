@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Residents\Tables;
+namespace App\Filament\Resources\RWS\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -8,50 +8,29 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
-use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 
-class ResidentsTable
+class RWSTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('nik')
-                    ->label('NIK')
-                    ->searchable()
-                    ->sortable(),
-
-                TextColumn::make('full_name')
-                    ->label('Nama')
-                    ->searchable()
-                    ->sortable(),
-
-                TextColumn::make('gender')
-                    ->label('JK')
-                    ->sortable(),
-
-                TextColumn::make('rw')
+                TextColumn::make('no_rw')
                     ->label('RW')
+                    ->searchable()
                     ->sortable(),
-
-                TextColumn::make('rt')
-                    ->label('RT')
-                    ->sortable(),
-
-                TextColumn::make('status')
-                    ->label('Status')
-                    ->badge()
+                TextColumn::make('name')
+                    ->label('Nama RW')
+                    ->searchable()
                     ->sortable(),
             ])
             ->filters([
                 TrashedFilter::make(),
             ])
             ->recordActions([
-                ViewAction::make()
-                    ->badge(),
                 EditAction::make()
                     ->badge(),
                 DeleteAction::make()

@@ -17,6 +17,7 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use UnitEnum;
 
 class ResidentResource extends Resource
 {
@@ -27,6 +28,9 @@ class ResidentResource extends Resource
     protected static ?string $recordTitleAttribute = 'full_name';
 
     // AWAL RENOVASI MANUAL
+
+    protected static UnitEnum|string|null $navigationGroup = 'Master Data';
+
     protected static ?string $navigationLabel = 'Penduduk';
 
     protected static ?string $modelLabel = 'Penduduk';
