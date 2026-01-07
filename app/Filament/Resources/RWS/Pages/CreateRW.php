@@ -12,6 +12,18 @@ class CreateRW extends CreateRecord
 
     protected static bool $canCreateAnother = false;
 
+    // untuk notifikasi
+    protected function getCreatedNotificationTitle(): ?string
+    {
+        return 'Data RW Berhasil Ditambahkan!';
+    }
+
+    // untuk redirect setelah berhasil ditambahkan
+    protected function getRedirectUrl(): string
+    {
+        return static::$resource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

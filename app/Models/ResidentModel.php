@@ -30,4 +30,9 @@ class ResidentModel extends Model
     {
         return $this->belongsTo(RTModel::class, 'rt_id', 'id');
     }
+
+    public function mutationsToMutations()
+    {
+        return $this->hasMany(MutationsModel::class, 'resident_id', 'id_residents');
+    }
 }

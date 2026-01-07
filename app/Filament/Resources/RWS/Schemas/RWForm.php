@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\RWS\Schemas;
 
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
 class RWForm
@@ -10,15 +11,17 @@ class RWForm
     {
         return $schema
             ->components([
-                \Filament\Forms\Components\TextInput::make('no_rw')
-                    ->label('Rw')
-                    ->placeholder('01')
+                TextInput::make('no_rw')
+                    ->label('No RW')
                     ->required()
-                    ->numeric()
-                    ->minLength(2)
-                    ->maxLength(2)
-                    ->unique(ignoreRecord: true),
-                \Filament\Forms\Components\TextInput::make('name')
+                    ->maxLength(3)
+                    ->regex('/^\d{2}$/') // wajib 2 digit
+                    ->unique(table: 'tb_rws', column: 'no_rw', ignoreRecord: true)
+                    ->validationMessages([
+                        'regex' => 'Format harus 2 digit. Contoh: 01, 02.',
+                        'unique' => 'No RW sudah terdaftar.',
+                    ]),
+                TextInput::make('name')
                     ->label('Nama RW')
                     ->placeholder('Rw 01')
                     ->required()

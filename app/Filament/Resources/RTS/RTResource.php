@@ -25,6 +25,12 @@ class RTResource extends Resource
     protected static ?string $recordTitleAttribute = 'no_rt';
     // AWAL RENOVASI MANUAL
 
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([SoftDeletingScope::class]);
+    }
+
     protected static UnitEnum|string|null $navigationGroup = 'Wilayah';
 
     protected static ?string $navigationLabel = 'RT';

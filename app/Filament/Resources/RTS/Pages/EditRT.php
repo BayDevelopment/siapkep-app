@@ -13,6 +13,18 @@ class EditRT extends EditRecord
 {
     protected static string $resource = RTResource::class;
 
+    // untuk notifikasi
+    protected function getSavedNotificationTitle(): ?string
+    {
+        return 'Data RT Berhasil Diperbarui!';
+    }
+
+    // untuk redirect setelah berhasil ditambahkan
+    protected function getRedirectUrl(): string
+    {
+        return static::$resource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [
@@ -32,7 +44,7 @@ class EditRT extends EditRecord
         return [
             $this->getSaveFormAction()
                 ->label('Simpan Perubahan')
-                ->icon('heroicon-o-plus'),
+                ->icon('heroicon-o-pencil'),
             $this->getCancelFormAction()
                 ->label('Cancel')
                 ->icon('heroicon-o-x-mark'),

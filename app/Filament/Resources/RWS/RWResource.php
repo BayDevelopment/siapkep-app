@@ -25,6 +25,11 @@ class RWResource extends Resource
     protected static ?string $recordTitleAttribute = 'no_rw';
 
     // AWAL RENOVASI MANUAL
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([SoftDeletingScope::class]);
+    }
 
     protected static UnitEnum|string|null $navigationGroup = 'Wilayah';
 

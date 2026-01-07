@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\Residents\Tables;
+namespace App\Filament\Resources\Mutations\Tables;
 
 use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
@@ -13,47 +12,32 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 
-class ResidentsTable
+class MutationsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('nik')
-                    ->label('NIK')
+                TextColumn::make('resident_id')
+                    ->label('Nama Penduduk')
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('full_name')
-                    ->label('Nama')
+                TextColumn::make('mutation_type')
+                    ->label('Tipe Mutasi')
                     ->searchable()
                     ->sortable(),
-
-                TextColumn::make('gender')
-                    ->label('JK')
-                    ->badge()
-                    ->sortable(),
-
-                TextColumn::make('rt_rtmodel.name')
-                    ->label('RT')
-                    ->tooltip(fn ($record) => data_get($record, 'rt_rtmodel.rw.no_rw') ?? '-'),
-
-                TextColumn::make('status')
-                    ->label('Status')
-                    ->badge()
+                TextColumn::make('mutation_date')
+                    ->label('Tanggal Mutasi')
+                    ->searchable()
                     ->sortable(),
             ])
             ->filters([
                 TrashedFilter::make(),
             ])
             ->recordActions([
-                ViewAction::make()
-                    ->badge(),
-                EditAction::make()
-                    ->badge(),
-                DeleteAction::make()
-                    ->badge()
-                    ->successNotificationTitle('Data Penduduk Berhasil Dihapus'),
+                ViewAction::make(),
+                EditAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

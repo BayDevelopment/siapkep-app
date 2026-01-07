@@ -13,6 +13,17 @@ class EditRW extends EditRecord
 {
     protected static string $resource = RWResource::class;
 
+    // untuk notifikasi
+    protected function getSavedNotificationTitle(): ?string
+    {
+        return 'Data RW Berhasil Diperbarui!';
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index'); // balik ke halaman list/table
+    }
+
     protected function getHeaderActions(): array
     {
         return [
@@ -33,7 +44,7 @@ class EditRW extends EditRecord
         return [
             $this->getSaveFormAction()
                 ->label('Simpan Perubahan')
-                ->icon('heroicon-o-plus'),
+                ->icon('heroicon-o-pencil'),
             $this->getCancelFormAction()
                 ->label('Cancel')
                 ->icon('heroicon-o-x-mark'),

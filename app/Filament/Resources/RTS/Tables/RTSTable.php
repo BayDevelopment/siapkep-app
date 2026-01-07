@@ -6,7 +6,9 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\ForceDeleteBulkAction;
+use Filament\Actions\RestoreAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
@@ -38,7 +40,19 @@ class RTSTable
                 EditAction::make()
                     ->badge(),
                 DeleteAction::make()
-                    ->badge(),
+                    ->badge()
+                    ->visible(fn ($record) => ! $record->trashed())
+                    ->successNotificationTitle('Data RT Berhasil Dihapus!'),
+
+                RestoreAction::make()
+                    ->badge()
+                    ->visible(fn ($record) => $record->trashed())
+                    ->successNotificationTitle('Data RT Berhasil Dipulihkan!'),
+
+                ForceDeleteAction::make()
+                    ->badge()
+                    ->visible(fn ($record) => $record->trashed())
+                    ->successNotificationTitle('Data RT Berhasil Dihapus Permanen!'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

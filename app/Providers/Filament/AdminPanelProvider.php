@@ -63,6 +63,11 @@ class AdminPanelProvider extends PanelProvider
                     ->collapsible(false),
                 NavigationGroup::make()
                     ->label('Wilayah'),
-            ]);
+            ])
+            // untuk logo dan nama aplikasi
+            ->brandLogo(asset('images/siapkep-app.png'))
+            ->brandName('Sistem Aplikasi Kependudukan')
+            ->brandLogoHeight('4rem')
+            ->font('Poppins');
     }
 }
