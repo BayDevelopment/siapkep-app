@@ -27,6 +27,11 @@ class ResidentResource extends Resource
     protected static ?string $recordTitleAttribute = 'full_name';
 
     // AWAL RENOVASI MANUAL
+    public static function getElequentQuery(): Builder
+    {
+        return parent::getElequentQuery()
+            ->withoutGlobalScopes([SoftDeletingScope::class]);
+    }
 
     protected static UnitEnum|string|null $navigationGroup = 'Master Data';
 

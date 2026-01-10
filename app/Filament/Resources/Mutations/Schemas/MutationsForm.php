@@ -4,6 +4,8 @@ namespace App\Filament\Resources\Mutations\Schemas;
 
 use Filament\Forms\Components\Select;
 use Filament\Schemas\Schema;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 class MutationsForm
 {
@@ -14,11 +16,16 @@ class MutationsForm
                 Select::make('resident_id')
                     ->label('Penduduk')
                     ->relationship(
-                        name: 'residentMutations',
-                        titleAttribute: 'full_name',
+                        name: 'residentMutations',              // relasi di model form (belongsTo)
+                        titleAttribute: 'full_name',   // kolom yang dipakai sebagai title default
+                        modifyQueryUsing: fn (Builder $query) => $query
+                            ->where('resident_status', 'mutasi') // ✅ filter hanya penduduk mutasi
                     )
-                    ->searchable()
-                    ->preload()
+                    ->getOptionLabelFromRecordUsing(
+                        fn (Model $record) => "{$record->nik} — {$record->full_name}"
+                    )
+                    ->searchable(['nik', 'full_name']) // ✅ bisa cari via NIK / Nama
+                    ->preload()                        // opsional (kalau datanya sedikit)
                     ->required(),
 
                 \Filament\Forms\Components\Select::make('mutation_type')

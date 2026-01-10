@@ -3,9 +3,12 @@
 namespace App\Filament\Resources\Mutations\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\ForceDeleteBulkAction;
+use Filament\Actions\RestoreAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
@@ -36,8 +39,24 @@ class MutationsTable
                 TrashedFilter::make(),
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+                ViewAction::make()
+                    ->badge(),
+                EditAction::make()
+                    ->badge(),
+                DeleteAction::make()
+                    ->badge()
+                    ->visible(fn ($record) => ! $record->trashed())
+                    ->successNotificationTitle('Data Mutasi Berhasil Dihapus!'),
+
+                RestoreAction::make()
+                    ->badge()
+                    ->visible(fn ($record) => $record->trashed())
+                    ->successNotificationTitle('Data Mutasi Berhasil Dipulihkan!'),
+
+                ForceDeleteAction::make()
+                    ->badge()
+                    ->visible(fn ($record) => $record->trashed())
+                    ->successNotificationTitle('Data Mutasi Berhasil Dihapus Permanen!'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

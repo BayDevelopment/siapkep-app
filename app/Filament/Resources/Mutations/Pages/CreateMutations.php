@@ -9,6 +9,8 @@ class CreateMutations extends CreateRecord
 {
     protected static string $resource = MutationsResource::class;
 
+    protected static bool $canCreateAnother = false;
+
     // untuk notifikasi
     protected function getCreatedNotificationTitle(): ?string
     {

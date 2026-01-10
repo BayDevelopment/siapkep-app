@@ -27,6 +27,11 @@ class MutationsResource extends Resource
     protected static ?string $recordTitleAttribute = 'mutation_type';
 
     // AWAL RENOVASI MANUAL
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([SoftDeletingScope::class]);
+    }
 
     protected static UnitEnum|string|null $navigationGroup = 'Master Data';
 

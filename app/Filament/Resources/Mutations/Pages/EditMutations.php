@@ -13,6 +13,17 @@ class EditMutations extends EditRecord
 {
     protected static string $resource = MutationsResource::class;
 
+    // untuk notifikasi
+    protected function getSavedNotificationTitle(): ?string
+    {
+        return 'Data Mutasi Berhasil Diperbarui!';
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index'); // balik ke halaman list/table
+    }
+
     protected function getHeaderActions(): array
     {
         return [

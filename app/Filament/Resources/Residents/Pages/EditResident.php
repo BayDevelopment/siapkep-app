@@ -14,6 +14,18 @@ class EditResident extends EditRecord
 {
     protected static string $resource = ResidentResource::class;
 
+    // untuk notifikasi
+    protected function getSavedNotificationTitle(): ?string
+    {
+        return 'Data Penduduk Berhasil Diperbarui!';
+    }
+
+    // untuk redirect setelah berhasil ditambahkan
+    protected function getRedirectUrl(): string
+    {
+        return static::$resource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [
