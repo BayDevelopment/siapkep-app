@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\Mutations\Tables;
 
+use Carbon\Carbon;
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -21,7 +23,7 @@ class MutationsTable
     {
         return $table
             ->columns([
-                TextColumn::make('resident_id')
+                TextColumn::make('residentMutations.full_name')
                     ->label('Nama Penduduk')
                     ->searchable()
                     ->sortable(),
@@ -33,30 +35,32 @@ class MutationsTable
                 TextColumn::make('mutation_date')
                     ->label('Tanggal Mutasi')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->formatStateUsing(fn ($state) => Carbon::parse($state)->locale('id')->translatedFormat('F d, Y')),
             ])
             ->filters([
                 TrashedFilter::make(),
             ])
             ->recordActions([
-                ViewAction::make()
-                    ->badge(),
-                EditAction::make()
-                    ->badge(),
-                DeleteAction::make()
-                    ->badge()
-                    ->visible(fn ($record) => ! $record->trashed())
-                    ->successNotificationTitle('Data Mutasi Berhasil Dihapus!'),
+                ActionGroup::make([
+                    ViewAction::make(),
+                    EditAction::make(),
 
-                RestoreAction::make()
-                    ->badge()
-                    ->visible(fn ($record) => $record->trashed())
-                    ->successNotificationTitle('Data Mutasi Berhasil Dipulihkan!'),
+                    DeleteAction::make()
+                        ->visible(fn ($record) => ! $record->trashed())
+                        ->successNotificationTitle('Data Mutasi Berhasil Dihapus!'),
 
-                ForceDeleteAction::make()
-                    ->badge()
-                    ->visible(fn ($record) => $record->trashed())
-                    ->successNotificationTitle('Data Mutasi Berhasil Dihapus Permanen!'),
+                    RestoreAction::make()
+                        ->visible(fn ($record) => $record->trashed())
+                        ->successNotificationTitle('Data Mutasi Berhasil Dipulihkan!'),
+
+                    ForceDeleteAction::make()
+                        ->visible(fn ($record) => $record->trashed())
+                        ->successNotificationTitle('Data Mutasi Berhasil Dihapus Permanen!'),
+                ])
+                    ->icon('heroicon-m-ellipsis-vertical')
+                    ->label('')
+                    ->iconButton(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

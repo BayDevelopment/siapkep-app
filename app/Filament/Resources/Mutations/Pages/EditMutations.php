@@ -27,10 +27,22 @@ class EditMutations extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            ViewAction::make(),
-            DeleteAction::make(),
+            // ViewAction::make(),
+            // DeleteAction::make(),
             ForceDeleteAction::make(),
             RestoreAction::make(),
+        ];
+    }
+
+    protected function getFormActions(): array
+    {
+        return [
+            $this->getSaveFormAction()
+                ->label('Simpan Perubahan')
+                ->icon('heroicon-o-pencil'),
+            $this->getCancelFormAction()
+                ->label('Cancel')
+                ->icon('heroicon-o-x-mark'),
         ];
     }
 }

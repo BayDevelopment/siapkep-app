@@ -63,7 +63,7 @@ class ResidentForm
                     ->required()
                     ->options([
                         'aktif' => 'Aktif',
-                        'pindah' => 'Pindah',
+                        'mutasi' => 'Mutasi',
                         'meninggal' => 'Meninggal',
                     ])
                     ->default('aktif'),

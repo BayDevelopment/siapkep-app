@@ -22,4 +22,16 @@ class CreateMutations extends CreateRecord
     {
         return static::$resource::getUrl('index');
     }
+
+    protected function getFormActions(): array
+    {
+        return [
+            $this->getCreateFormAction()
+                ->label('Create')
+                ->icon('heroicon-o-plus'),
+            $this->getCancelFormAction()
+                ->label('Cancel')
+                ->icon('heroicon-o-x-mark'),
+        ];
+    }
 }

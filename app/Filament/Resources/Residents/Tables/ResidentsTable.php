@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Residents\Tables;
 
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -34,7 +35,7 @@ class ResidentsTable
                 TextColumn::make('gender')
                     ->label('JK')
                     ->badge()
-                    ->sortable(),
+                    ->color(fn (string $state) => $state === 'P' ? 'danger' : 'info'),
 
                 TextColumn::make('rt_rtmodel.name')
                     ->label('RT')
@@ -61,23 +62,25 @@ class ResidentsTable
                 TrashedFilter::make(),
             ])
             ->recordActions([
-                ViewAction::make()
-                    ->badge(),
-                EditAction::make()
-                    ->badge(),
-                DeleteAction::make()
-                    ->badge()
-                    ->visible(fn ($record) => ! $record->trashed())
-                    ->successNotificationTitle('Data Penduduk Berhasil Dihapus'),
-                RestoreAction::make()
-                    ->badge()
-                    ->visible(fn ($record) => $record->trashed())
-                    ->successNotificationTitle('Data Penduduk Berhasil Dipulihkan!'),
+                ActionGroup::make([
+                    ViewAction::make(),
+                    EditAction::make(),
 
-                ForceDeleteAction::make()
-                    ->badge()
-                    ->visible(fn ($record) => $record->trashed())
-                    ->successNotificationTitle('Data Penduduk Berhasil Dihapus Permanen!'),
+                    DeleteAction::make()
+                        ->visible(fn ($record) => ! $record->trashed())
+                        ->successNotificationTitle('Data Penduduk Berhasil Dihapus'),
+
+                    RestoreAction::make()
+                        ->visible(fn ($record) => $record->trashed())
+                        ->successNotificationTitle('Data Penduduk Berhasil Dipulihkan!'),
+
+                    ForceDeleteAction::make()
+                        ->visible(fn ($record) => $record->trashed())
+                        ->successNotificationTitle('Data Penduduk Berhasil Dihapus Permanen!'),
+                ])
+                    ->icon('heroicon-m-ellipsis-vertical')
+                    ->label('')       // biar nggak ada teks
+                    ->iconButton(),   // trigger jadi tombol icon bulat
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
