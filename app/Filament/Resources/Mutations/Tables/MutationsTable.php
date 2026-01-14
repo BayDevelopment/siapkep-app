@@ -36,7 +36,10 @@ class MutationsTable
                     ->label('Tanggal Mutasi')
                     ->searchable()
                     ->sortable()
-                    ->formatStateUsing(fn ($state) => Carbon::parse($state)->locale('id')->translatedFormat('F d, Y')),
+                    ->formatStateUsing(fn ($state) => $state
+                           ? Carbon::parse($state)->locale('id')->translatedFormat('l, d F Y')
+                           : '-'
+                    ),
             ])
             ->filters([
                 TrashedFilter::make(),

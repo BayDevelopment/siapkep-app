@@ -11,6 +11,18 @@ class CreateMeninggal extends CreateRecord
 
     protected static bool $canCreateAnother = false;
 
+    // untuk notifikasi
+    protected function getCreatedNotificationTitle(): ?string
+    {
+        return 'Data Meninggal Berhasil Ditambahkan!';
+    }
+
+    // untuk redirect setelah berhasil ditambahkan
+    protected function getRedirectUrl(): string
+    {
+        return static::$resource::getUrl('index');
+    }
+
     public function getFormActions(): array
     {
         return [

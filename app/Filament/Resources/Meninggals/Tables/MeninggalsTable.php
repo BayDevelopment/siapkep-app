@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Meninggals\Tables;
 
+use Carbon\Carbon;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -29,7 +30,11 @@ class MeninggalsTable
                 TextColumn::make('death_date')
                     ->label('Tanggal Meninggal')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->formatStateUsing(fn ($state) => $state
+                            ? Carbon::parse($state)->locale('id')->translatedFormat('l, d F Y')
+                            : '-'
+                    ),
                 TextColumn::make('death_place')
                     ->label('Tempat Meninggal')
                     ->searchable()

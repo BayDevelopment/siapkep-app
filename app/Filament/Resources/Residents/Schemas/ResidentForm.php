@@ -2,7 +2,10 @@
 
 namespace App\Filament\Resources\Residents\Schemas;
 
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
 class ResidentForm
@@ -11,7 +14,7 @@ class ResidentForm
     {
         return $schema
             ->components([
-                \Filament\Forms\Components\TextInput::make('nik')
+                TextInput::make('nik')
                     ->label('NIK')
                     ->placeholder('Masukan Nik')
                     ->required()
@@ -19,13 +22,13 @@ class ResidentForm
                     ->maxLength(16)
                     ->unique(ignoreRecord: true),
 
-                \Filament\Forms\Components\TextInput::make('full_name')
+                TextInput::make('full_name')
                     ->label('Nama Lengkap')
                     ->placeholder('Masukan Nama Lengkap')
                     ->required()
                     ->maxLength(255),
 
-                \Filament\Forms\Components\Select::make('gender')
+                Select::make('gender')
                     ->label('Jenis Kelamin')
                     ->required()
                     ->options([
@@ -33,15 +36,15 @@ class ResidentForm
                         'P' => 'Perempuan',
                     ]),
 
-                \Filament\Forms\Components\TextInput::make('birth_place')
+                TextInput::make('birth_place')
                     ->label('Tempat Lahir')
                     ->placeholder('Tempat Lahir')
                     ->maxLength(255),
 
-                \Filament\Forms\Components\DatePicker::make('birth_date')
+                DatePicker::make('birth_date')
                     ->label('Tanggal Lahir'),
 
-                \Filament\Forms\Components\Textarea::make('address')
+                Textarea::make('address')
                     ->label('Alamat')
                     ->placeholder('Alamat')
                     ->rows(3),
@@ -58,7 +61,7 @@ class ResidentForm
                     ->preload()
                     ->required(),
 
-                \Filament\Forms\Components\Select::make('resident_status')
+                Select::make('resident_status')
                     ->label('Status Penduduk')
                     ->required()
                     ->options([
