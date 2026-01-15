@@ -8,6 +8,11 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class HidupStat extends StatsOverviewWidget
 {
+    protected int|string|array $columnSpan = [
+        'md' => 12,
+        'xl' => 6,
+    ];
+
     protected function getStats(): array
     {
         return [

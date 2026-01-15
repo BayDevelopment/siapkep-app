@@ -7,6 +7,11 @@ use Filament\Widgets\ChartWidget;
 
 class ResidentChart extends ChartWidget
 {
+    // protected int|string|array $columnSpan = [
+    //     'md' => 12,  // di tablet/HP turun ke bawah full
+    //     'xl' => 6,   // di layar besar setengah
+    // ];
+
     protected ?string $heading = 'Penduduk Chart';
 
     protected function getData(): array

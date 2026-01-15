@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Filament\Widgets\HidupStat;
 use App\Filament\Widgets\ResidentChart;
+use App\Filament\Widgets\UsersTable;
 use Filament\Pages\Dashboard as BaseDashboard;
 
 class Dashboard extends BaseDashboard
@@ -11,8 +12,8 @@ class Dashboard extends BaseDashboard
     public function getColumns(): int|array
     {
         return [
-            'md' => 3,
-            'xl' => 3,
+            'md' => 12,
+            'xl' => 12,
         ];
     }
 
@@ -21,6 +22,7 @@ class Dashboard extends BaseDashboard
         return [
             HidupStat::class,
             ResidentChart::class,
+            UsersTable::class,
         ];
     }
 
